@@ -1,0 +1,42 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY ALU IS
+PORT(
+	SrcA	: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SrcB	: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	FUNC 	: IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+	IMEDSrc 	: IN STD_LOGIC;
+	Clock 		: IN STD_LOGIC ;
+	ALUout : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END ALU;
+
+ARCHITECTURE Behavior OF ALU IS
+BEGIN
+	PROCESS (Clock,SrcA,SrcB) -- Alterar do Clock
+	BEGIN
+		IF Clock = '1' AND Clock'event THEN
+		CASE FUNC IS
+			WHEN "000" =>
+				IF IMEDSrc ='1' THEN
+					ALUout <= SrcB;
+				ELSE
+					ALUout <= SrcA;
+				END IF;
+			WHEN "001" =>
+				ALUout <= SrcA + SrcB;
+			WHEN "010" =>
+				ALUout <= SrcA - SrcB;
+			WHEN "011" =>
+				ALUout <= SrcA AND SrcB;
+			WHEN "100" =>
+				ALUout <= SrcA OR SrcB;
+			WHEN OTHERS => 
+				ALUout <= "00000000";
+		END CASE;
+		END IF;
+	END PROCESS;
+END Behavior;

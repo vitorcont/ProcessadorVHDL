@@ -1,0 +1,41 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY Projeto2 IS
+PORT(
+	Op	: IN STD_LOGIC;
+	ALUDone	: IN STD_LOGIC;
+	Clock		: IN	STD_LOGIC;
+	IMEDSrc 	: OUT STD_LOGIC;
+	RegRead 	: OUT STD_LOGIC ;
+	Fetch 		: OUT STD_LOGIC
+	);
+END Projeto2;
+
+ARCHITECTURE Behavior OF Projeto2 IS
+BEGIN
+	PROCESS (Clock) -- Alterar do Clock
+	BEGIN
+		IF Clock = '1' AND Clock'event THEN
+			IF Op = '0' THEN
+				IMEDSrc <= '0';
+				RegRead <= '1';
+			ELSIF Op = '1' THEN
+				IMEDSrc <= '1';
+				RegRead <= '1';
+			END IF;
+			IF ALUDone = '1' THEN
+			
+				IMEDSrc	<='0';
+				RegRead <= '0';
+				Fetch <= '1';
+			ELSIF ALUDone = '0' THEN
+				Fetch <= '0';
+			ELSE
+				Fetch <= '1';
+			END IF;
+		END IF;
+	END PROCESS;
+END Behavior;

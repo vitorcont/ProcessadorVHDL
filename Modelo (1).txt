@@ -1,0 +1,67 @@
+Descrição
+8 Registradores
+18 Bits
+
+SINAIS
+IMEDSrc
+	1 - Imed Tipo I
+	0 - Tipo R
+
+1a Parte
+1 Bit
+	0 - Registradores
+	1 - Imediato
+
+2a Parte - Registradores
+	8 Registradores
+	3 Bits Cada
+	9 Bits
+	Ri -> 3 Bits
+	Rj -> 3 Bits
+	Rk -> 3 Bits
+
+3a Parte - AUX Imediato
+	5 bits
+
+4a Parte - FUNC
+	5 Funções
+	3 Bits
+	000 - MOV
+	001 - ADD
+	010 - SUB
+	011 - AND
+	100 - OR
+
+1 000 001 00000101 000
+1 001 001 00000111 000
+
+0 010 001 000 00000 001
+
+1 011 010 00000001 001
+
+
+
+MOVI REG0,1           1 000 001 00000001  000
+MOVI REG1,5           1 001 000 00000101  000
+ADDI REG2,REG0, 2      1 010 000 00000010  001 
+ADD REG3, REG2, REG0    0 011 010 000 00000 001
+OR REG4, REG0,  REG1   0 100 000 001 00000 100 
+AND REG5,REG4,REG3	0 101 100 011 00000 011
+SUB REG6, REG1, REG0  0 110 001 000 00000 010
+OR REG7, REG3,  REG4   0 111 011 100 00000 100 
+	
+Vitor
+
+Simulação
+U.C.
+RI
+
+
+Garros
+
+Memória
+ALU
+PC
+Banco
+	
+	
